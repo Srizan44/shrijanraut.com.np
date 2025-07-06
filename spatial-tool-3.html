@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Spatial Tool 3 - Turf.js Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-draw/dist/leaflet.draw.css"/>
+  <style>
+    body, html { margin: 0; height: 100%; font-family: sans-serif; }
+    #map { height: 90vh; }
+    #info { padding: 10px; font-size: 14px; background: #f8f8f8; border-top: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+<div id="info"><strong>Instructions:</strong> Draw a polygon or point. Click on it to see buffer, area, and intersect results.</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+
+<script>
+  var map = L.map('map').setView([27.67, 85.43], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18
+  }).addTo(map);
+
+  var drawnItems = new L.FeatureGroup().addTo(map);
+
+  var drawControl = new L.Control.Draw({
+    edit: { featureGroup: drawnItems },
+    draw: {
+      circle: false,
+      rectangle: false,
+      circlemarker: false
+    }
+  });
+  map.addControl(drawControl);
+
+  let lastFeature = null;
+
+  map.on(L.Draw.Event.CREATED, function (e) {
+    var layer = e.layer;
+    drawnItems.addLayer(layer);
+    lastFeature = layer;
+
+    layer.on('click', () => {
+      analyzeFeature(layer);
+    });
+  });
+
+  function analyzeFeature(layer) {
+    let geojson = layer.toGeoJSON();
+
+    let info = "";
+
+    // Area
+    if (geojson.geometry.type === "Polygon") {
+      let area = turf.area(geojson);
+      info += `<p><strong>Area:</strong> ${area.toFixed(2)} m²</p>`;
+    }
+
+    // Buffer (1km)
+    let buffered = turf.buffer(geojson, 1, { units: 'kilometers' });
+    let bufferLayer = L.geoJSON(buffered, { color: 'red' }).addTo(map);
+    info += `<p><strong>Buffered (1km)</strong> shown in red.</p>`;
+
+    // Intersect with existing layers
+    let intersects = [];
+    drawnItems.eachLayer(function (other) {
+      if (other !== layer) {
+        let otherGeo = other.toGeoJSON();
+        if (turf.booleanIntersects(geojson, otherGeo)) {
+          intersects.push(otherGeo);
+        }
+      }
+    });
+
+    if (intersects.length > 0) {
+      info += `<p><strong>Intersects with:</strong> ${intersects.length} other feature(s)</p>`;
+    } else {
+      info += `<p><strong>No Intersections</strong></p>`;
+    }
+
+    document.getElementById("info").innerHTML = info;
+  }
+</script>
+
+</body>
+</html>

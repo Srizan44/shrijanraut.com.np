@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shrijan Raut | Geomatics Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0ea5e9',
+            secondary: '#0f172a',
+            accent: '#06b6d4'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0f172a;
+      color: #e2e8f0;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    
+    .nav-link {
+      position: relative;
+      padding-bottom: 5px;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #0ea5e9;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .hero-pattern {
+      background: 
+        radial-gradient(circle at 10% 20%, rgba(14, 165, 233, 0.1) 0%, rgba(14, 165, 233, 0) 20%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.1) 0%, rgba(6, 182, 212, 0) 20%);
+    }
+    
+    .section-title {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 3rem;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #0ea5e9, #06b6d4);
+      border-radius: 2px;
+    }
+    
+    .skill-card {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(6, 182, 212, 0.2);
+      border-color: rgba(14, 165, 233, 0.4);
+    }
+    
+    .project-card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(6, 182, 212, 0.3);
+      border-color: rgba(14, 165, 233, 0.5);
+    }
+    
+    .project-image {
+      transition: transform 0.5s ease;
+    }
+    
+    .project-card:hover .project-image {
+      transform: scale(1.05);
+    }
+    
+    .timeline-item {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+      box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.2);
+    }
+    
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 24px;
+      width: 2px;
+      height: calc(100% + 25px);
+      background: linear-gradient(to bottom, #0ea5e9, #06b6d4);
+    }
+    
+    .timeline-item:last-child::after {
+      display: none;
+    }
+    
+    .contact-card {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(6, 182, 212, 0.2);
+    }
+    
+    .btn {
+      background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+      transition: all 0.3s ease;
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(6, 182, 212, 0.3);
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.5); }
+      70% { box-shadow: 0 0 0 15px rgba(14, 165, 233, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
+    }
+    
+    @media (max-width: 768px) {
+      .hero-content {
+        flex-direction: column;
+      }
+      
+      .hero-text {
+        text-align: center;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="fixed w-full z-50 bg-secondary/90 backdrop-blur-sm py-4 px-6 shadow-lg">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold text-white flex items-center">
+        <span class="text-primary">S</span>hrijan
+        <span class="text-primary ml-1">R</span>aut
+      </a>
+      
+      <div class="hidden md:flex space-x-10">
+        <a href="#hero" class="nav-link text-gray-300 hover:text-white">Home</a>
+        <a href="#about" class="nav-link text-gray-300 hover:text-white">About</a>
+        <a href="#skills" class="nav-link text-gray-300 hover:text-white">Skills</a>
+        <a href="#projects" class="nav-link text-gray-300 hover:text-white">Projects</a>
+        <a href="#education" class="nav-link text-gray-300 hover:text-white">Education</a>
+        <a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a>
+      </div>
+      
+      <div class="flex items-center space-x-4">
+        <a href="https://www.linkedin.com/in/shrijan-raut-474769363" target="_blank" class="text-gray-400 hover:text-primary transition">
+          <i class="fab fa-linkedin-in text-lg"></i>
+        </a>
+        <a href="mailto:shreejnan.raut1@gmail.com" class="text-gray-400 hover:text-primary transition">
+          <i class="far fa-envelope text-lg"></i>
+        </a>
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="text-gray-400 hover:text-white">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-secondary py-4 px-6 mt-4 rounded-lg shadow-xl">
+      <div class="flex flex-col space-y-4">
+        <a href="#hero" class="nav-link text-gray-300 hover:text-white">Home</a>
+        <a href="#about" class="nav-link text-gray-300 hover:text-white">About</a>
+        <a href="#skills" class="nav-link text-gray-300 hover:text-white">Skills</a>
+        <a href="#projects" class="nav-link text-gray-300 hover:text-white">Projects</a>
+        <a href="#education" class="nav-link text-gray-300 hover:text-white">Education</a>
+        <a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="min-h-screen flex items-center pt-16 hero-pattern">
+    <div class="max-w-7xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center justify-between">
+      <div class="hero-text md:w-1/2 mb-16 md:mb-0 fade-in">
+        <h4 class="text-primary text-lg font-medium mb-2">Hello, I'm</h4>
+        <h1 class="text-5xl md:text-6xl font-bold mb-4">Shrijan <span class="text-primary">Raut</span></h1>
+        <h2 class="text-2xl md:text-3xl text-gray-400 mb-6">Geomatics Engineer & GIS Specialist</h2>
+        <p class="text-gray-400 mb-8 max-w-lg">
+          Crafting spatial solutions and shaping digital worlds through innovative mapping, 
+          GIS analysis, and remote sensing technologies.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#projects" class="btn px-8 py-3 rounded-full font-medium text-white">
+            View My Work <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+          <a href="#contact" class="px-8 py-3 rounded-full font-medium border border-primary text-primary hover:bg-primary/10 transition">
+            Contact Me
+          </a>
+        </div>
+      </div>
+      
+      <div class="hero-image md:w-1/2 flex justify-center fade-in">
+        <div class="relative">
+          <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/30 shadow-2xl floating">
+            <img src="https://i.imgur.com/0Kah3Es.jpeg" alt="Shrijan Raut" class="w-full h-full object-cover">
+          </div>
+          <div class="absolute -bottom-6 -right-6 bg-secondary p-4 rounded-xl shadow-xl border border-primary/20">
+            <div class="flex items-center">
+              <div class="bg-primary/10 p-2 rounded-lg mr-3">
+                <i class="fas fa-map-marker-alt text-primary text-xl"></i>
+              </div>
+              <div>
+                <p class="text-gray-400 text-sm">Location</p>
+                <p class="font-medium">Panauti, Kavre, Nepal</p>
+              </div>
+            </div>
+          </div>
+          <div class="absolute -top-6 -left-6 bg-secondary p-4 rounded-xl shadow-xl border border-primary/20">
+            <div class="flex items-center">
+              <div class="bg-primary/10 p-2 rounded-lg mr-3">
+                <i class="fas fa-graduation-cap text-primary text-xl"></i>
+              </div>
+              <div>
+                <p class="text-gray-400 text-sm">Education</p>
+                <p class="font-medium">Kathmandu University</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="section-title text-3xl font-bold inline-block">About Me</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div class="fade-in">
+          <h3 class="text-2xl font-semibold mb-6">Who I Am</h3>
+          <p class="text-gray-400 mb-4">
+            I am Shrijan Raut, a passionate Geomatics Engineering student from Panauti, Kavre. 
+            Currently in my 4th year at Kathmandu University, I specialize in mapping, GIS analysis, 
+            and remote sensing.
+          </p>
+          <p class="text-gray-400 mb-4">
+            My expertise lies in transforming geographical data into actionable insights through 
+            innovative spatial solutions. I'm proficient in various geospatial technologies and 
+            programming languages that enable me to tackle complex spatial problems.
+          </p>
+          <p class="text-gray-400 mb-6">
+            When I'm not working on geospatial projects, you can find me on the football field. 
+            I'm an avid football enthusiast who enjoys both playing and watching the beautiful game.
+          </p>
+          
+          <div class="flex flex-wrap gap-4 mt-8">
+            <div class="flex items-center">
+              <i class="fas fa-map text-primary mr-2"></i>
+              <span>Panauti, Kavre, Nepal</span>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-envelope text-primary mr-2"></i>
+              <span>shreejnan.raut1@gmail.com</span>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-graduation-cap text-primary mr-2"></i>
+              <span>B.E. Geomatics Engineering</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="fade-in">
+          <h3 class="text-2xl font-semibold mb-6">My Expertise</h3>
+          
+          <div class="grid grid-cols-2 gap-6">
+            <div class="skill-card p-6 rounded-xl">
+              <div class="bg-primary/10 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                <i class="fas fa-map-marked-alt text-primary text-2xl"></i>
+              </div>
+              <h4 class="text-lg font-semibold mb-2">GIS Analysis</h4>
+              <p class="text-gray-400 text-sm">
+                Spatial analysis, suitability modeling, and geodatabase management
+              </p>
+            </div>
+            
+            <div class="skill-card p-6 rounded-xl">
+              <div class="bg-primary/10 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                <i class="fas fa-satellite text-primary text-2xl"></i>
+              </div>
+              <h4 class="text-lg font-semibold mb-2">Remote Sensing</h4>
+              <p class="text-gray-400 text-sm">
+                Land use classification, image processing, and change detection
+              </p>
+            </div>
+            
+            <div class="skill-card p-6 rounded-xl">
+              <div class="bg-primary/10 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                <i class="fas fa-code text-primary text-2xl"></i>
+              </div>
+              <h4 class="text-lg font-semibold mb-2">Programming</h4>
+              <p class="text-gray-400 text-sm">
+                Python, JavaScript, C++, and Java for geospatial applications
+              </p>
+            </div>
+            
+            <div class="skill-card p-6 rounded-xl">
+              <div class="bg-primary/10 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                <i class="fas fa-globe-asia text-primary text-2xl"></i>
+              </div>
+              <h4 class="text-lg font-semibold mb-2">Web Mapping</h4>
+              <p class="text-gray-400 text-sm">
+                Interactive maps, spatial tools, and web-based GIS applications
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-20 bg-slate-900/50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="section-title text-3xl font-bold inline-block">Technical Skills</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="skill-card p-6 rounded-xl fade-in">
+          <h3 class="text-xl font-semibold mb-4 flex items-center">
+            <i class="fas fa-map mr-3 text-primary"></i> GIS Software
+          </h3>
+          <ul class="space-y-3">
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>ArcGIS Pro</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>QGIS</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>ENVI</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>ERDAS Imagine</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>Global Mapper</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="skill-card p-6 rounded-xl fade-in">
+          <h3 class="text-xl font-semibold mb-4 flex items-center">
+            <i class="fas fa-laptop-code mr-3 text-primary"></i> Programming
+          </h3>
+          <ul class="space-y-3">
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>Python (Geopandas, Rasterio)</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>JavaScript (Leaflet, Turf.js)</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>Java</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>C++</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>SQL/PostGIS</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="skill-card p-6 rounded-xl fade-in">
+          <h3 class="text-xl font-semibold mb-4 flex items-center">
+            <i class="fas fa-globe mr-3 text-primary"></i> Web Technologies
+          </h3>
+          <ul class="space-y-3">
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>HTML5/CSS3</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>JavaScript</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>Leaflet.js</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>Mapbox GL JS</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>GeoServer</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="skill-card p-6 rounded-xl fade-in">
+          <h3 class="text-xl font-semibold mb-4 flex items-center">
+            <i class="fas fa-cubes mr-3 text-primary"></i> Other Skills
+          </h3>
+          <ul class="space-y-3">
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>Spatial Analysis</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>3D Modeling</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>Cartography</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>Surveying</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-check-circle text-primary mr-2"></i>
+              <span>Photogrammetry</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="section-title text-3xl font-bold inline-block">Featured Projects</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Project 1 -->
+        <div class="project-card rounded-xl overflow-hidden fade-in">
+          <div class="h-56 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1587440871875-191322ee64b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="3D Model of KU Campus" class="w-full h-full object-cover project-image">
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-bold">3D Model of KU Campus</h3>
+              <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full">3D Modeling</span>
+            </div>
+            <p class="text-gray-400 mb-4">
+              Created a detailed 3D model of Kathmandu University campus structures using photogrammetry and CAD software.
+            </p>
+            <div class="flex justify-between items-center">
+              <a href="#" class="text-primary hover:underline">View Details</a>
+              <div class="flex space-x-2">
+                <span class="text-xs bg-slate-700 px-2 py-1 rounded">ArcGIS</span>
+                <span class="text-xs bg-slate-700 px-2 py-1 rounded">CAD</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 2 -->
+        <div class="project-card rounded-xl overflow-hidden fade-in">
+          <div class="h-56 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="COVID-19 Outbreak Map" class="w-full h-full object-cover project-image">
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-bold">COVID-19 Outbreak Map</h3>
+              <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full">Cartography</span>
+            </div>
+            <p class="text-gray-400 mb-4">
+              Designed a choropleth map showing COVID-19 spread and distribution across Nepal during the pandemic.
+            </p>
+            <div class="flex justify-between items-center">
+              <a href="#" class="text-primary hover:underline">View Details</a>
+              <div class="flex space-x-2">
+                <span class="text-xs bg-slate-700 px-2 py-1 rounded">QGIS</span>
+                <span class="text-xs bg-slate-700 px-2 py-1 rounded">Data Visualization</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 3 -->
+        <div class="project-card rounded-xl overflow-hidden fade-in">
+          <div class="h-56 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1629909613652-0e1e1d6e1f0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Hospital Suitability Analysis" class="w-full h-full object-cover project-image">
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-bold">Hospital Suitability Analysis</h3>
+              <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full">GIS Analysis</span>
+            </div>
+            <p class="text-gray-400 mb-4">
+              Performed site selection for hospitals in Kavre using Multi-Criteria Decision Analysis (MCDA) and AHP techniques.
+            </p>
+            <div class="flex justify-between items-center">
+              <a href="1aa722f3-3d71-4b93-800c-9cb8865d286c.pdf" target="_blank" class="text-primary hover:underline">View Report</a>
+              <div class="flex space-x-2">
+                <span class="text-xs bg-slate-700 px-2 py-1 rounded">ArcGIS</span>
+                <span class="text-xs bg-slate-700 px-2 py-1 rounded">MCDA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 4 -->
+        <div class="project-card rounded-xl overflow-hidden fade-in">
+          <div class="h-56 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1501523460185-2aa5d2a0f981?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="HOT OSM Mapping" class="w-full h-full object-cover project-image">
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-bold">HOT OSM Mapping (Myanmar)</h3>
+              <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full">Humanitarian</span>
+            </div>
+            <p class="text-gray-400 mb-4">
+              Mapped earthquake-affected buildings in Myanmar using OpenStreetMap tools to assist humanitarian efforts.
+            </p>
+            <div class="flex justify-between items-center">
+              <a href="#" class="text-primary hover:underline">View Details</a>
+              <div class="flex space-x-2">
+                <span class="text-xs bg-slate-700 px-2 py-1 rounded">OSM</span>
+                <span class="text-xs bg-slate-700 px-2 py-1 rounded">iD Editor</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 5 -->
+        <div class="project-card rounded-xl overflow-hidden fade-in">
+          <div class="h-56 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Land Use Classification" class="w-full h-full object-cover project-image">
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-bold">Land Use Classification</h3>
+              <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full">Remote Sensing</span>
+            </div>
+            <p class="text-gray-400 mb-4">
+              Performed land use and land cover classification using satellite imagery and ENVI software for change detection analysis.
+            </p>
+            <div class="flex justify-between items-center">
+              <a href="#" class="text-primary hover:underline">View Details</a>
+              <div class="flex space-x-2">
+                <span class="text-xs bg-slate-700 px-2 py-1 rounded">ENVI</span>
+                <span class="text-xs bg-slate-700 px-2 py-1 rounded">Sentinel-2</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project 6 -->
+        <div class="project-card rounded-xl overflow-hidden fade-in">
+          <div class="h-56 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80" alt="Spatial Analysis Tool" class="w-full h-full object-cover project-image">
+          </div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-bold">Spatial Analysis Tool</h3>
+              <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full">Web GIS</span>
+            </div>
+            <p class="text-gray-400 mb-4">
+              Developed an interactive spatial analysis tool using Turf.js for buffer creation, area calculation, and feature intersection.
+            </p>
+            <div class="flex justify-between items-center">
+              <a href="spatial-tool-3.html" target="_blank" class="text-primary hover:underline">View Demo</a>
+              <div class="flex space-x-2">
+                <span class="text-xs bg-slate-700 px-2 py-1 rounded">JavaScript</span>
+                <span class="text-xs bg-slate-700 px-2 py-1 rounded">Turf.js</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section id="education" class="py-20 bg-slate-900/50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="section-title text-3xl font-bold inline-block">Education & Experience</h2>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        <!-- Timeline -->
+        <div class="relative">
+          <!-- Item 1 -->
+          <div class="timeline-item fade-in">
+            <div class="bg-secondary/50 p-6 rounded-xl border border-primary/20">
+              <div class="flex justify-between flex-wrap mb-2">
+                <h3 class="text-xl font-bold">Kathmandu University</h3>
+                <span class="text-primary">2020 - Present</span>
+              </div>
+              <p class="text-gray-400 mb-2">Bachelor of Engineering in Geomatics Engineering</p>
+              <p class="text-gray-400 text-sm">
+                Currently in 4th year, specializing in GIS, Remote Sensing, and Spatial Analysis.
+                Coursework includes Advanced GIS, Photogrammetry, Web GIS, and Geospatial Programming.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Item 2 -->
+          <div class="timeline-item fade-in">
+            <div class="bg-secondary/50 p-6 rounded-xl border border-primary/20">
+              <div class="flex justify-between flex-wrap mb-2">
+                <h3 class="text-xl font-bold">Khwopa College</h3>
+                <span class="text-primary">2018 - 2020</span>
+              </div>
+              <p class="text-gray-400 mb-2">+2 Science (Physics, Chemistry, Mathematics)</p>
+              <p class="text-gray-400 text-sm">
+                Completed higher secondary education with focus on science and mathematics.
+                Developed strong analytical and problem-solving skills.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Item 3 -->
+          <div class="timeline-item fade-in">
+            <div class="bg-secondary/50 p-6 rounded-xl border border-primary/20">
+              <div class="flex justify-between flex-wrap mb-2">
+                <h3 class="text-xl font-bold">Arunodaya English Secondary School</h3>
+                <span class="text-primary">2008 - 2018</span>
+              </div>
+              <p class="text-gray-400 mb-2">School Education (SEE completed)</p>
+              <p class="text-gray-400 text-sm">
+                Completed primary and secondary education. Developed foundational knowledge
+                and participated in various extracurricular activities.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="section-title text-3xl font-bold inline-block">Get In Touch</h2>
+        <p class="text-gray-400 max-w-2xl mx-auto mt-4">
+          Have a project in mind or want to discuss geospatial solutions? Feel free to reach out!
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div class="fade-in">
+          <form class="space-y-6">
+            <div>
+              <label for="name" class="block text-gray-400 mb-2">Your Name</label>
+              <input type="text" id="name" class="w-full bg-secondary/50 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="John Doe">
+            </div>
+            
+            <div>
+              <label for="email" class="block text-gray-400 mb-2">Email Address</label>
+              <input type="email" id="email" class="w-full bg-secondary/50 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="john@example.com">
+            </div>
+            
+            <div>
+              <label for="subject" class="block text-gray-400 mb-2">Subject</label>
+              <input type="text" id="subject" class="w-full bg-secondary/50 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Project Inquiry">
+            </div>
+            
+            <div>
+              <label for="message" class="block text-gray-400 mb-2">Message</label>
+              <textarea id="message" rows="5" class="w-full bg-secondary/50 border border-gray-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Your message here..."></textarea>
+            </div>
+            
+            <button type="submit" class="btn px-8 py-3 rounded-lg font-medium text-white w-full">
+              Send Message <i class="fas fa-paper-plane ml-2"></i>
+            </button>
+          </form>
+        </div>
+        
+        <div class="fade-in">
+          <div class="contact-card p-8 rounded-xl h-full">
+            <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+            
+            <div class="space-y-6">
+              <div class="flex items-start">
+                <div class="bg-primary/10 p-3 rounded-lg mr-4">
+                  <i class="fas fa-map-marker-alt text-primary text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold mb-1">Location</h4>
+                  <p class="text-gray-400">Panauti, Kavre, Nepal</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="bg-primary/10 p-3 rounded-lg mr-4">
+                  <i class="fas fa-envelope text-primary text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold mb-1">Email</h4>
+                  <p class="text-gray-400">shreejnan.raut1@gmail.com</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="bg-primary/10 p-3 rounded-lg mr-4">
+                  <i class="fab fa-linkedin-in text-primary text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold mb-1">LinkedIn</h4>
+                  <p class="text-gray-400">linkedin.com/in/shrijan-raut-474769363</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="bg-primary/10 p-3 rounded-lg mr-4">
+                  <i class="fas fa-university text-primary text-xl"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold mb-1">University</h4>
+                  <p class="text-gray-400">Kathmandu University, Dhulikhel</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-10 pt-6 border-t border-gray-800">
+              <h4 class="text-lg font-semibold mb-4">Let's Connect</h4>
+              <div class="flex space-x-4">
+                <a href="#" class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition">
+                  <i class="fab fa-facebook-f text-primary"></i>
+                </a>
+                <a href="#" class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition">
+                  <i class="fab fa-twitter text-primary"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/shrijan-raut-474769363" target="_blank" class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition">
+                  <i class="fab fa-linkedin-in text-primary"></i>
+                </a>
+                <a href="#" class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary/20 transition">
+                  <i class="fab fa-github text-primary"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <a href="#" class="text-2xl font-bold text-white flex items-center">
+            <span class="text-primary">S</span>hrijan
+            <span class="text-primary ml-1">R</span>aut
+          </a>
+          <p class="text-gray-500 mt-2">Geomatics Engineer & GIS Specialist</p>
+        </div>
+        
+        <div class="flex space-x-6">
+          <a href="#hero" class="text-gray-500 hover:text-primary transition">Home</a>
+          <a href="#about" class="text-gray-500 hover:text-primary transition">About</a>
+          <a href="#projects" class="text-gray-500 hover:text-primary transition">Projects</a>
+          <a href="#contact" class="text-gray-500 hover:text-primary transition">Contact</a>
+        </div>
+      </div>
+      
+      <div class="mt-10 pt-6 border-t border-gray-800 text-center text-gray-500 text-sm">
+        <p>&copy; 2023 Shrijan Raut. All rights reserved.</p>
+        <p class="mt-2">Crafting Spatial Solutions, Shaping Digital Worlds.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <a href="#hero" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-primary flex items-center justify-center shadow-lg hover:bg-primary/90 transition z-50">
+    <i class="fas fa-arrow-up text-white"></i>
+  </a>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+    
+    // Scroll animation for elements
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+    
+    fadeElements.forEach(element => {
+      observer.observe(element);
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
